@@ -1,0 +1,33 @@
+{
+  "name": "onreal",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ONREAL - C2C land and commercial property marketplace with location intelligence (frontend prototype)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "framer-motion": "11.11.17",
+    "leaflet": "1.9.4",
+    "lucide-react": "0.454.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-leaflet": "4.2.1",
+    "react-router-dom": "6.28.0",
+    "recharts": "2.13.3"
+  },
+  "devDependencies": {
+    "@testing-library/react": "16.0.1",
+    "@vitejs/plugin-react": "4.3.4",
+    "autoprefixer": "10.4.20",
+    "jsdom": "25.0.1",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.17",
+    "vite": "5.4.11",
+    "vitest": "2.1.8"
+  }
+}

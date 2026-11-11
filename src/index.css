@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   ONREAL design tokens. Colours are RGB triplets so Tailwind opacity
+   modifiers work (bg-brand/10). Light is the default theme.
+------------------------------------------------------------------- */
+:root {
+  --bg: 247 246 242;
+  --surface: 255 255 255;
+  --ink: 24 32 28;
+  --muted: 98 110 103;
+  --line: 230 228 220;
+  --danger: 176 54 42;
+  --brand: 11 79 60;
+  --brand-700: 8 60 46;
+  --brand-100: 205 228 218;
+  --brand-50: 233 243 238;
+  --brand-text: 11 79 60;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='auto'] {
+    --bg: 11 17 14; --surface: 19 28 23; --ink: 232 238 234; --muted: 150 164 156; --line: 40 54 46;
+    --danger: 238 110 98; --brand: 31 130 92; --brand-700: 25 108 76; --brand-100: 30 66 52; --brand-50: 22 44 35; --brand-text: 120 218 168;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: 11 17 14; --surface: 19 28 23; --ink: 232 238 234; --muted: 150 164 156; --line: 40 54 46;
+  --danger: 238 110 98; --brand: 31 130 92; --brand-700: 25 108 76; --brand-100: 30 66 52; --brand-50: 22 44 35; --brand-text: 120 218 168;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-bg font-sans text-ink antialiased; overflow-x: hidden; }
+  h1, h2, h3, h4 { @apply font-bold tracking-tight text-ink; }
+  :focus-visible { outline: 2px solid rgb(var(--brand-text)); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: #C8E86B; color: #14201B; }
+  input[type='checkbox'], input[type='radio'] { accent-color: rgb(var(--brand)); }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .section { @apply py-16 sm:py-20 lg:py-24; }
+
+  /* buttons */
+  .btn { @apply inline-flex h-11 select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-transparent px-5 text-sm font-semibold transition duration-150 active:scale-[.98] disabled:pointer-events-none disabled:opacity-60; }
+  .btn-primary { @apply bg-brand text-white shadow-sm hover:bg-brand-700; }
+  .btn-lime { @apply bg-lime text-deep-800 hover:bg-lime-300; }
+  .btn-outline { @apply border-line bg-surface text-ink hover:border-ink/25 hover:bg-bg; }
+  .btn-ghost { @apply bg-transparent text-ink hover:bg-ink/5; }
+  .btn-danger { @apply border-danger/40 bg-surface text-danger hover:bg-danger/10; }
+  .btn-light { @apply bg-white text-deep hover:bg-white/90; }
+  .btn-sm { @apply h-9 rounded-lg px-3.5 text-[13px]; }
+  .btn-lg { @apply h-12 px-6 text-[15px]; }
+  .icon-btn { @apply inline-grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-ink transition hover:bg-bg; }
+
+  /* surfaces */
+  .card { @apply rounded-2xl border border-line bg-surface shadow-card; }
+  .card-pad { @apply p-5 sm:p-6; }
+
+  /* form controls */
+  .label { @apply mb-1.5 block text-[13px] font-semibold text-ink; }
+  .input { @apply h-11 w-full rounded-xl border border-line bg-surface px-3.5 text-sm text-ink placeholder:text-muted/70 transition focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/15 disabled:bg-bg disabled:text-muted; }
+  textarea.input { @apply h-auto min-h-[112px] resize-y py-3; }
+  select.input { @apply appearance-none bg-no-repeat pr-9; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23788' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-position: right 12px center; }
+  .input-error { @apply border-danger focus:border-danger focus:ring-danger/15; }
+  .field-error { @apply mt-1.5 text-xs font-medium text-danger; }
+  .field-hint { @apply mt-1.5 text-xs text-muted; }
+
+  /* chips, badges, tags */
+  .chip { @apply inline-flex h-9 items-center rounded-full border border-line bg-surface px-3.5 text-[13px] font-semibold text-ink transition hover:border-ink/30; }
+  .chip-on { @apply border-brand bg-brand text-white hover:border-brand; }
+  .badge { @apply inline-flex items-center gap-1.5 rounded-md bg-bg px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-ink ring-1 ring-inset ring-line; }
+  .badge-sale { @apply bg-brand text-white ring-0; }
+  .badge-rent { @apply bg-lime text-deep-800 ring-0; }
+  .badge-soft { @apply bg-brand-50 text-brand-text ring-0; }
+  .badge-warn { @apply bg-amber-soft text-amber-ink ring-0; }
+  .eyebrow { @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.14em] text-brand-text; }
+  .sample-tag { @apply inline-flex items-center gap-1 rounded-full bg-amber-soft px-2.5 py-1 text-[11px] font-bold text-amber-ink; }
+
+  /* tables */
+  .table { @apply w-full text-left text-sm; }
+  .table th { @apply border-b border-line px-3 py-3 text-xs font-bold uppercase tracking-wide text-muted; }
+  .table td { @apply border-b border-line px-3 py-3.5 align-middle; }
+
+  .skeleton { @apply animate-shimmer rounded-xl bg-[linear-gradient(90deg,rgb(var(--line)/.55)_25%,rgb(var(--line)/.95)_50%,rgb(var(--line)/.55)_75%)] bg-[length:200%_100%]; }
+  .divider { @apply border-t border-line; }
+}
+
+/* ---- third-party widgets ---- */
+.chart-tip { background: #10241c; color: #fff; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.chart-tip-label { color: #C8E86B; font-weight: 800; margin-bottom: 4px; }
+.recharts-wrapper:focus, .recharts-surface:focus { outline: none; }
+.recharts-legend-item-text { color: rgb(var(--ink)) !important; font-size: 12px; }
+.onreal-pin { background: none; border: 0; }
+.onreal-pin .op { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; background: #0B4F3C; border: 3px solid #fff; transform: rotate(-45deg); box-shadow: 0 4px 12px rgba(0,0,0,.35); display: grid; place-items: center; transition: transform .2s; }
+.onreal-pin .op span { width: 9px; height: 9px; border-radius: 50%; background: #C8E86B; }
+.onreal-pin .op.active { background: #A6C940; }
+.onreal-pin .op.active span { background: #0B4F3C; }
+.onreal-pin:hover .op { transform: rotate(-45deg) scale(1.15); }
+.leaflet-container { font-family: inherit; z-index: 0; border-radius: inherit; }
+.leaflet-tooltip { border-radius: 8px; font-weight: 700; font-size: 12px; }
+.map-shell { isolation: isolate; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+
+/* Simple animated skyline used on sign-in and admin access screens. */
+.skyline { position:absolute; inset:auto 0 0; height:48%; display:flex; align-items:flex-end; justify-content:center; gap:clamp(5px,1.2vw,18px); opacity:.48; pointer-events:none; }
+.skyline i { display:block; width:9%; min-width:22px; max-width:90px; height:55%; border:1px solid rgba(200,232,107,.38); background:repeating-linear-gradient(to bottom,transparent 0 13px,rgba(200,232,107,.25) 14px 16px),repeating-linear-gradient(to right,transparent 0 12px,rgba(200,232,107,.2) 13px 15px),linear-gradient(160deg,rgba(200,232,107,.13),rgba(255,255,255,.02)); transform-origin:bottom; animation: skyline-rise 4.8s ease-in-out infinite alternate; }
+.skyline i:nth-child(2){height:75%;animation-delay:.3s}.skyline i:nth-child(3){height:92%;width:12%;animation-delay:.6s;clip-path:polygon(15% 0,85% 0,100% 100%,0 100%)}.skyline i:nth-child(4){height:64%;animation-delay:.9s}.skyline i:nth-child(5){height:82%;animation-delay:1.2s}.skyline i:nth-child(6){height:45%;animation-delay:1.5s}
+@keyframes skyline-rise { from{transform:translateY(8px);filter:brightness(.8)} to{transform:translateY(-5px);filter:brightness(1.2)} }
+.auth-skyline { min-height:260px; }
+@media (min-width:1024px){.auth-skyline{min-height:100vh}}
+@media (prefers-reduced-motion:reduce){.skyline i{animation:none}}
